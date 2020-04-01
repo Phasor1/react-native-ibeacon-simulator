@@ -96,6 +96,7 @@ public class BeaconBroadcast extends ReactContextBaseJavaModule {
 		BeaconParser beaconParser = new BeaconParser()
 				.setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24");
 		this.beaconTransmitter = new BeaconTransmitter(context, beaconParser);
+		this.beaconTransmitter.setConnectable(true);
 		this.beaconTransmitter.startAdvertising(beacon, new AdvertiseCallback() {
 
 			@Override

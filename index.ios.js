@@ -1,4 +1,4 @@
-/**
+, frequency/**
  * @providesModule BeaconBroadcast
  * @flow
  */
@@ -15,8 +15,8 @@ const NativeBeaconBroadcast = NativeModules.BeaconBroadcast;
  */
 
 const BeaconBroadcast = {
-  startAdvertisingBeaconWithString: function (uuid, identifier, major, minor) {
-    NativeBeaconBroadcast.startSharedAdvertisingBeaconWithString(uuid, major, minor, identifier);
+  startAdvertisingBeaconWithString: function (uuid, identifier, major, minor, frequency, power) {
+    NativeBeaconBroadcast.startSharedAdvertisingBeaconWithString(uuid, major, minor, identifier, frequency, power);
   },
 
   stopAdvertisingBeacon: function () {

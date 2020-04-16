@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -83,7 +83,7 @@ public class BeaconBroadcast extends ReactContextBaseJavaModule {
 	}
 
   @ReactMethod
-  public void startSharedAdvertisingBeaconWithString(String uuid, int major, int minor,String identifier) {
+  public void startSharedAdvertisingBeaconWithString(String uuid, int major, int minor, String identifier, int frequencyUpdate, String power) {
 		int manufacturer = 0x4C;
 		Beacon beacon = new Beacon.Builder()
 				.setId1(uuid)
@@ -96,6 +96,36 @@ public class BeaconBroadcast extends ReactContextBaseJavaModule {
 		BeaconParser beaconParser = new BeaconParser()
 				.setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24");
 		this.beaconTransmitter = new BeaconTransmitter(context, beaconParser);
+		int advertiseMode = 0;
+		switch(frequencyUpdate){
+			case 1:
+				advertiseMode = AdvertiseSettings.ADVERTISE_MODE_LOW_POWER;
+				break;
+			case 3:
+				advertiseMode = AdvertiseSettings.ADVERTISE_MODE_BALANCED;
+				break;
+			case 10:
+				advertiseMode = AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY;
+				break;
+		}
+		int txPower = 0;
+		switch(power){
+			case "HIGH":
+				txPower = AdvertiseSettings.ADVERTISE_TX_POWER_HIGH;
+				break;
+			case "MEDIUM":
+				txPower = AdvertiseSettings.ADVERTISE_TX_POWER_MEDIUM;
+				break;
+			case "LOW":
+				txPower = AdvertiseSettings.ADVERTISE_TX_POWER_LOW;
+				break;
+			case "ULTRA_LOW":
+				txPower = AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW;
+				break;
+		}
+		Log.d("ReactNative", "frequency " + frequencyUpdate + " " + advertiseMode);
+		this.beaconTransmitter.setAdvertiseMode(advertiseMode);
+		this.beaconTransmitter.setAdvertiseTxPowerLevel(txPower);
 		this.beaconTransmitter.setConnectable(true);
 		this.beaconTransmitter.startAdvertising(beacon, new AdvertiseCallback() {
 

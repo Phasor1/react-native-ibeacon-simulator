@@ -85,13 +85,32 @@ public class BeaconBroadcast extends ReactContextBaseJavaModule {
   @ReactMethod
   public void startSharedAdvertisingBeaconWithString(String uuid, int major, int minor, String identifier, int frequencyUpdate, String power) {
 		int manufacturer = 0x4C;
+		int txPower = 0, txAdvertisePower = 0;
+		switch(power){
+			case "HIGH":
+				txAdvertisePower = AdvertiseSettings.ADVERTISE_TX_POWER_HIGH;
+				txPower = -56;
+				break;
+			case "MEDIUM":
+				txAdvertisePower = AdvertiseSettings.ADVERTISE_TX_POWER_MEDIUM;
+				txPower = -66;
+				break;
+			case "LOW":
+				txAdvertisePower = AdvertiseSettings.ADVERTISE_TX_POWER_LOW;
+				txPower = -75;
+				break;
+			case "ULTRA_LOW":
+				txAdvertisePower = AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW;
+				txPower = -80;
+				break;
+		}
 		Beacon beacon = new Beacon.Builder()
 				.setId1(uuid)
 				.setId2(String.valueOf(major))
 				.setId3(String.valueOf(minor))
 				.setManufacturer(manufacturer)
 				.setBluetoothName(identifier)
-				.setTxPower(-59)
+				.setTxPower(txPower)
 				.build();
 		BeaconParser beaconParser = new BeaconParser()
 				.setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24");
@@ -108,24 +127,10 @@ public class BeaconBroadcast extends ReactContextBaseJavaModule {
 				advertiseMode = AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY;
 				break;
 		}
-		int txPower = 0;
-		switch(power){
-			case "HIGH":
-				txPower = AdvertiseSettings.ADVERTISE_TX_POWER_HIGH;
-				break;
-			case "MEDIUM":
-				txPower = AdvertiseSettings.ADVERTISE_TX_POWER_MEDIUM;
-				break;
-			case "LOW":
-				txPower = AdvertiseSettings.ADVERTISE_TX_POWER_LOW;
-				break;
-			case "ULTRA_LOW":
-				txPower = AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW;
-				break;
-		}
+		
 		Log.d("ReactNative", "frequency " + frequencyUpdate + " " + advertiseMode);
 		this.beaconTransmitter.setAdvertiseMode(advertiseMode);
-		this.beaconTransmitter.setAdvertiseTxPowerLevel(txPower);
+		this.beaconTransmitter.setAdvertiseTxPowerLevel(txAdvertisePower);
 		this.beaconTransmitter.setConnectable(true);
 		this.beaconTransmitter.startAdvertising(beacon, new AdvertiseCallback() {
 

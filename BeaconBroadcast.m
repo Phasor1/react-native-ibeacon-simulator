@@ -12,9 +12,9 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(startSharedAdvertisingBeaconWithString:(NSString *)uuid major:(int)major minor:(int)minor identifier:(NSString *)identifier)
+RCT_EXPORT_METHOD(startSharedAdvertisingBeaconWithString:(NSString *)uuid major:(int)major minor:(int)minor identifier:(NSString *)identifier frequency:(int)frequency power:(NSString)power)
 {
-    [[BeaconBroadcast sharedInstance] startAdvertisingBeaconWithString: uuid major: major minor: minor identifier: identifier];
+    [[BeaconBroadcast sharedInstance] startAdvertisingBeaconWithString: uuid major: major minor: minor identifier: identifier frequency: frequency power: power];
 }
 
 RCT_EXPORT_METHOD(stopSharedAdvertisingBeacon)

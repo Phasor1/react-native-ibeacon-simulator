@@ -1,13 +1,35 @@
 {
-  "name": "react-native-ibeacon-simulator",
-  "version": "1.0.10",
-  "description": "A cool package for simulate your iOS devices as beacon",
-  "author": "Flow",
-  "nativePackage": true,
-  "repository": {
+  "_from": "git+https://github.com/Phasor1/react-native-ibeacon-simulator.git",
+  "_id": "react-native-ibeacon-simulator@1.0.10",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/react-native-ibeacon-simulator",
+  "_phantomChildren": {},
+  "_requested": {
     "type": "git",
-    "url": "git+https://github.com/williamtran29/react-native-ibeacon-simulator.git"
+    "raw": "https://github.com/Phasor1/react-native-ibeacon-simulator",
+    "rawSpec": "https://github.com/Phasor1/react-native-ibeacon-simulator",
+    "saveSpec": "git+https://github.com/Phasor1/react-native-ibeacon-simulator.git",
+    "fetchSpec": "https://github.com/Phasor1/react-native-ibeacon-simulator.git",
+    "gitCommittish": null
   },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/Phasor1/react-native-ibeacon-simulator.git#384fb093620c199969ae5ee53d3d5aa39bd800a9",
+  "_spec": "https://github.com/Phasor1/react-native-ibeacon-simulator",
+  "_where": "C:\\apps\\ORTO\\lavorazione\\ibeacon",
+  "author": {
+    "name": "Flow"
+  },
+  "bugs": {
+    "url": "https://github.com/williamtran29/react-native-ibeacon-simulator/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A cool package for simulate your iOS devices as beacon",
+  "homepage": "https://github.com/williamtran29/react-native-ibeacon-simulator#readme",
   "keywords": [
     "react-native",
     "react",
@@ -15,5 +37,12 @@
     "ibeacon",
     "beacon simulator"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "name": "react-native-ibeacon-simulator",
+  "nativePackage": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/williamtran29/react-native-ibeacon-simulator.git"
+  },
+  "version": "1.0.10"
 }
